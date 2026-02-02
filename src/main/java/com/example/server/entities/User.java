@@ -23,6 +23,9 @@ public class User {
     @Column(name="CREATED_AT")
     private LocalDateTime created_at;
 
+    @Column(name="PHONE_NUMBER")
+    private String phoneNumber;
+
 
     // setter & getter
 
@@ -65,4 +68,8 @@ public class User {
     public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
+
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }
