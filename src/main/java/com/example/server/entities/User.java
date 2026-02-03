@@ -1,5 +1,6 @@
 package com.example.server.entities;
 
+import com.example.server.role.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,27 +8,23 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="USERS")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
-
-    @Column(name="NAME")
+    @Column(name="USER_NAME")
     private String name;
-
-    @Column(name="EMAIL")
+    @Column(name="USER_EMAIL")
     private String email;
-
     @Column(name="USER_PASSWORD")
     private String password;
-
-    @Column(name="CREATED_AT")
-    private LocalDateTime created_at;
-
-    @Column(name="PHONE_NUMBER")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="USER_ROLE")
+    private Role role;
+    @Column(name="USER_PHONENUMBER")
     private String phoneNumber;
-
-
-    // setter & getter
+    @Column(name="CREATED_AT")
+    private LocalDateTime createAt;
 
     public String getUserId() {
         return userId;
@@ -61,15 +58,27 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+    public Role getRole() {
+        return role;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public String getPhoneNumber() { return phoneNumber; }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
 }
