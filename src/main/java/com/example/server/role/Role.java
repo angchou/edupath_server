@@ -14,6 +14,13 @@ public class Role {
     @Column(name="ROLE_NAME")
     private String name;
 
+    public Role() {}
+
+    public Role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
