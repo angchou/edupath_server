@@ -35,11 +35,11 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/mentor/**").hasRole("MENTOR")
-                        .requestMatchers("/api/finance/**").hasRole("FINANCE")
                         .requestMatchers("/api/support/**").hasRole("SUPPORT")
+                        .requestMatchers("/api/finance/**").hasRole("FINANCE")
                         .requestMatchers("/api/qa/**").hasRole("QA")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
 

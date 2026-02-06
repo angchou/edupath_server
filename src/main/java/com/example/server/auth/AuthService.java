@@ -52,7 +52,7 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setRole(new Role(1, "learner"));
+        user.setRole(1);
         user.setCreateAt(LocalDateTime.now());
 
         return userRepository.save(user);

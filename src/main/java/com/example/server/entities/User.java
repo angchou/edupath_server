@@ -18,9 +18,11 @@ public class User {
     private String email;
     @Column(name="USER_PASSWORD")
     private String password;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="USER_ROLE")
-    private Role role;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="USER_ROLE")
+//    private Role role;
+    @Column(name="USER_ROLE")
+    private Integer role;
     @Column(name="USER_PHONENUMBER")
     private String phoneNumber;
     @Column(name="CREATED_AT")
@@ -58,11 +60,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 

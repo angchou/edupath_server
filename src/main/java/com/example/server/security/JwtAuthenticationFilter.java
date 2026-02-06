@@ -2,7 +2,6 @@ package com.example.server.security;
 
 import com.example.server.auth.JwtUtil;
 import com.example.server.repositories.RoleRepository;
-import com.example.server.services.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -40,12 +39,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = header.substring(7);
 
+
         try {
 
             Claims claims = jwt.getClaims(token);
 
             String email = claims.getSubject();
-            String role = claims.get("role", String.class);
+            Integer role = claims.get("role", Integer.class);
 
             logger.info(email + " accesses system || role=" + role);
 
@@ -53,14 +53,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(
                             email,
                             null,
-                            List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                            List.of(new SimpleGrantedAuthority("ROLE_" + getRoleName(role)))
                     );
 
             SecurityContextHolder.getContext().setAuthentication(auth);
         } catch (Exception e) {
+            System.out.println("Exception");
             SecurityContextHolder.clearContext();
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private String getRoleName(Integer role) {
+        if (role == 1)
+            return "LEARNER";
+        else if (role == 2)
+            return "MENTOR";
+        else if (role == 3)
+            return "SUPPORT";
+        else if (role == 4)
+            return "FINANCE";
+        else if (role == 5)
+            return "QA";
+        else
+            return "ADMIN";
     }
 }

@@ -6,9 +6,9 @@ public class UserLoginResponse {
 
     private String token;
     private String email;
-    private Role role;
+    private Integer role;
 
-    public UserLoginResponse(String token, String email, Role role) {
+    public UserLoginResponse(String token, String email, Integer role) {
         this.token = token;
         this.email = email;
         this.role = role;
@@ -30,11 +30,11 @@ public class UserLoginResponse {
         this.email = email;
     }
 
-    public Role getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 }
