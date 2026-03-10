@@ -1,12 +1,11 @@
 package com.example.server.auth;
 
+import com.example.server.dto.requests.BlockRequest;
 import com.example.server.dto.requests.UserLoginRequest;
 import com.example.server.dto.requests.UserRegisterRequest;
 import com.example.server.dto.responses.UserLoginResponse;
-import com.example.server.dto.responses.UserRegisterResponse;
 import com.example.server.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,4 +28,5 @@ public class AuthController {
         User user = authService.register(request);
         return ResponseEntity.ok(Map.of("Message", "Register Success"));
     }
+
 }
