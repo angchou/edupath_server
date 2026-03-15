@@ -1,6 +1,5 @@
 package com.example.server.auth;
 
-import com.example.server.dto.requests.BlockRequest;
 import com.example.server.dto.requests.UserLoginRequest;
 import com.example.server.dto.requests.UserRegisterRequest;
 import com.example.server.dto.responses.UserLoginResponse;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -21,7 +19,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public UserLoginResponse login(@RequestBody UserLoginRequest request) {
-        return authService.login(request.getEmail(), request.getPassword());
+        return authService.login(request.getUser_email(), request.getUser_password());
     }
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserRegisterRequest request) {

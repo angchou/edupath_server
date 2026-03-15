@@ -40,11 +40,11 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/users")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<UserViewResponse>> getUsers() {
-        List<UserViewResponse> users = adminService.getNonAdminUsers();
-        return ResponseEntity.ok(users);
-    }
+//    @GetMapping("/users")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<List<UserViewResponse>> getUsers() {
+//        List<UserViewResponse> users = adminService.getNonAdminUsers();
+//        return ResponseEntity.ok(users);
+//    }
 
 }

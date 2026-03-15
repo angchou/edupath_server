@@ -1,32 +1,31 @@
 package com.example.server.entities;
 
-import com.example.server.role.Role;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name="USERS")
+@Table(name = "USERS")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private String userId;
-    @Column(name="USER_NAME")
-    private String name;
-    @Column(name="USER_EMAIL")
-    private String email;
-    @Column(name="USER_PASSWORD")
-    private String password;
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name="USER_ROLE")
-//    private Role role;
-    @Column(name="USER_ROLE")
-    private Integer role;
-    @Column(name="USER_PHONENUMBER")
-    private String phoneNumber;
-    @Column(name="CREATED_AT")
-    private LocalDateTime createAt;
+    @Column(name = "HOTEN")
+    private String userName;
+    @Column(name = "EMAIL")
+    private String userEmail;
+    @Column(name = "PASSWORD")
+    private String userPassword;
+    @Column(name = "TRANGTHAI")
+    private Integer userStatus;
+    @Column(name = "NGAYTAO")
+    private String userCreatedAt;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<UserRole> userRole;
 
     public String getUserId() {
         return userId;
@@ -36,51 +35,51 @@ public class User {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public Integer getRole() {
-        return role;
+    public Integer getUserStatus() {
+        return userStatus;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getUserCreatedAt() {
+        return userCreatedAt;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setUserCreatedAt(String userCreatedAt) {
+        this.userCreatedAt = userCreatedAt;
     }
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public List<UserRole> getUserRole() {
+        return userRole;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
+    public void setUserRole(List<UserRole> userRole) {
+        this.userRole = userRole;
     }
 }

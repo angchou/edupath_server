@@ -1,6 +1,7 @@
 package com.example.server.dto.responses;
 
-import com.example.server.role.Role;
+
+import com.example.server.entities.Role;
 
 public class UserRegisterResponse {
     private String email;
