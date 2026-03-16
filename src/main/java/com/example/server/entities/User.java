@@ -3,6 +3,7 @@ package com.example.server.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -10,17 +11,17 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", nullable = false)
     private String userId;
-    @Column(name = "HOTEN")
+    @Column(name = "HOTEN", nullable = false)
     private String userName;
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String userEmail;
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String userPassword;
-    @Column(name = "TRANGTHAI")
+    @Column(name = "TRANGTHAI", nullable = false)
     private Integer userStatus;
-    @Column(name = "NGAYTAO")
+    @Column(name = "NGAYTAO", nullable = false)
     private String userCreatedAt;
 
     @OneToMany(mappedBy = "user")

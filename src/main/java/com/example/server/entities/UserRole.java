@@ -12,11 +12,11 @@ public class UserRole {
     private String userRoleId;
 
     @ManyToOne
-    @JoinColumn(name = "ROLE_ID")
+    @JoinColumn(name = "ROLE_ID", nullable = false)
     @JsonBackReference
     private Role role;
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID", nullable = false)
     @JsonBackReference
     private User user;
 

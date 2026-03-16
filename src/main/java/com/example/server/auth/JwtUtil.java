@@ -23,6 +23,12 @@ public class JwtUtil {
                 .map(userRole -> userRole.getRole().getRoleName())
                 .toList();
 
+        System.out.println(user.getUserEmail() + " roles: ");
+        for (String role : roles) {
+            System.out.println(role);
+        }
+        System.out.println("-----");
+
         return Jwts.builder()
                 .setSubject(user.getUserEmail())
                 .claim("roles", roles)

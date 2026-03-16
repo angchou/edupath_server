@@ -1,6 +1,5 @@
 package com.example.server.controllers;
 
-import com.example.server.dto.responses.UserViewResponse;
 import com.example.server.entities.User;
 import com.example.server.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +18,7 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/{email}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('LEARNER')")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         Optional<User> userOptional = adminService.getUserByEmail(email);
         if (userOptional.isEmpty())
