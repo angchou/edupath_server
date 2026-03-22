@@ -1,6 +1,9 @@
 package com.example.server.controllers;
 
+import com.example.server.dto.requests.CreateEmployeeRequest;
 import com.example.server.entities.User;
+import com.example.server.repositories.EmployeeRepository;
+import com.example.server.repositories.UserRepository;
 import com.example.server.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +21,6 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/{email}")
-    @PreAuthorize("hasRole('LEARNER')")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         Optional<User> userOptional = adminService.getUserByEmail(email);
         if (userOptional.isEmpty())
@@ -28,7 +30,6 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{email}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable String email) {
         try {
             adminService.deleteUserByEmail(email);
@@ -37,6 +38,7 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
 
 //    @GetMapping("/users")
 //    @PreAuthorize("hasRole('ADMIN')")

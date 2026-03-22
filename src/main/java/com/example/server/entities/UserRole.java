@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class UserRole {
 
     @Id
-    @Column(name = "USER_ROLE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USERROLE_ID")
     private String userRoleId;
 
     @ManyToOne

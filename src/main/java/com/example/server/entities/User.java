@@ -11,6 +11,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false)
     private String userId;
     @Column(name = "HOTEN", nullable = false)
@@ -21,8 +22,8 @@ public class User {
     private String userPassword;
     @Column(name = "TRANGTHAI", nullable = false)
     private Integer userStatus;
-    @Column(name = "NGAYTAO", nullable = false)
-    private String userCreatedAt;
+    @Column(name = "NGAYTAO")
+    private LocalDateTime userCreatedAt;
 
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
@@ -68,11 +69,11 @@ public class User {
         this.userStatus = userStatus;
     }
 
-    public String getUserCreatedAt() {
+    public LocalDateTime getUserCreatedAt() {
         return userCreatedAt;
     }
 
-    public void setUserCreatedAt(String userCreatedAt) {
+    public void setUserCreatedAt(LocalDateTime userCreatedAt) {
         this.userCreatedAt = userCreatedAt;
     }
 

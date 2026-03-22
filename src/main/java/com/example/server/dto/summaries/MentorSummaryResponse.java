@@ -1,6 +1,7 @@
 package com.example.server.dto.summaries;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class MentorSummaryResponse {
 
@@ -8,7 +9,7 @@ public class MentorSummaryResponse {
     private String mentorUserName;
     private String mentorEmail;
     private Integer mentorStatus;
-    private String mentorCreatedAt;
+    private LocalDateTime mentorCreatedAt;
     private BigDecimal mentorAverageRating;
 
     public String getMentorId() {
@@ -43,11 +44,11 @@ public class MentorSummaryResponse {
         this.mentorStatus = mentorStatus;
     }
 
-    public String getMentorCreatedAt() {
+    public LocalDateTime getMentorCreatedAt() {
         return mentorCreatedAt;
     }
 
-    public void setMentorCreatedAt(String mentorCreatedAt) {
+    public void setMentorCreatedAt(LocalDateTime mentorCreatedAt) {
         this.mentorCreatedAt = mentorCreatedAt;
     }
 

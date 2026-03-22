@@ -15,7 +15,6 @@ public class CourseViewResponse {
     private BigDecimal coursePrice;
     private Integer courseSize;
     private Integer courseStatus;
-    private Double courseAverageRating;
 
     private MentorSummaryResponse mentorSummaryResponse;
 
@@ -81,14 +80,6 @@ public class CourseViewResponse {
 
     public void setCourseStatus(Integer courseStatus) {
         this.courseStatus = courseStatus;
-    }
-
-    public Double getCourseAverageRating() {
-        return courseAverageRating;
-    }
-
-    public void setCourseAverageRating(Double courseAverageRating) {
-        this.courseAverageRating = courseAverageRating;
     }
 
     public MentorSummaryResponse getMentorSummaryResponse() {

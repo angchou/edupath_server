@@ -10,11 +10,12 @@ import java.time.LocalDateTime;
 public class Course {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "KHOAHOC_ID", nullable = false)
     private String courseId;
     @Column(name = "TENKH", nullable = false)
     private String courseName;
-    @Column(name = "NGAYTAO")
+    @Column(name = "NGAYTAO", nullable = false)
     private LocalDateTime courseCreatedAt;
     @Column(name = "NGAYTHAYDOITRANGTHAI")
     private LocalDateTime statusChangedAt;
@@ -26,12 +27,8 @@ public class Course {
     private BigDecimal coursePrice;
     @Column(name = "SLHV", nullable = false)
     private Integer courseSize;
-    @Column(name = "TINHTRANG")
+    @Column(name = "TINHTRANG", nullable = false)
     private Integer courseStatus;
-    @Column(name = "TRUNGBINHDANHGIA")
-    private Double courseAverageRating;
-    @Column(name = "DOANHTHU")
-    private Double courseOutcome;
 
     @ManyToOne
     @JoinColumn(name = "MENTOR_ID", nullable = false)
@@ -107,22 +104,6 @@ public class Course {
 
     public void setCourseStatus(Integer courseStatus) {
         this.courseStatus = courseStatus;
-    }
-
-    public Double getCourseAverageRating() {
-        return courseAverageRating;
-    }
-
-    public void setCourseAverageRating(Double courseAverageRating) {
-        this.courseAverageRating = courseAverageRating;
-    }
-
-    public Double getCourseOutcome() {
-        return courseOutcome;
-    }
-
-    public void setCourseOutcome(Double courseOutcome) {
-        this.courseOutcome = courseOutcome;
     }
 
     public Mentor getMentor() {

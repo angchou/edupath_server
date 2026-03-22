@@ -1,11 +1,16 @@
 package com.example.server.controllers;
 
 import com.example.server.dto.requests.BlockRequest;
+import com.example.server.dto.requests.ChangePasswordRequest;
 import com.example.server.dto.responses.BlockResponse;
+import com.example.server.dto.responses.CustomerViewResponse;
 import com.example.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -14,12 +19,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PutMapping("/password/change") // change password
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> changeUserPassword(@RequestBody ChangePasswordRequest request) {
+        userService.changeUserPassword(request);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/customer/all") // get all customer
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<CustomerViewResponse>> getCustomers() {
+        List<CustomerViewResponse> customers = userService.getCustomers();
+
+        return ResponseEntity.ok(customers);
+    }
+
     @PostMapping("/course/block/save")
     public void saveCourseBlock(@RequestBody BlockRequest blockRequest) {
         System.out.println(blockRequest.getURL());
         System.out.println(blockRequest.getText());
     }
-
     @GetMapping("/course/block/load")
     public ResponseEntity<BlockResponse> loadCourseBlock() {
         BlockResponse blockResponse = new BlockResponse();

@@ -19,8 +19,6 @@ public class CourseMapper {
         res.setCourseDescription(course.getCourseDescription());
         res.setCoursePrice(course.getCoursePrice());
         res.setCourseStatus(course.getCourseStatus());
-        res.setCourseAverageRating(course.getCourseAverageRating());
-
         Mentor mentor = course.getMentor();
         User user = mentor.getUser();
 
