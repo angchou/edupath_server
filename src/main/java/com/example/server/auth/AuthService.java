@@ -29,7 +29,6 @@ public class AuthService {
 
     // login
     public UserLoginResponse login(String email, String password) {
-
         User user = usersRepository.findByUserEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email doesn't exists!"));
 
