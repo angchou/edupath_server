@@ -1,29 +1,25 @@
 package com.example.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ROLE")
 public class Role {
-
     @Id
-    private Integer roleId;
+    @Column(name = "ROLE_ID", nullable = false)
+    private int roleID;
     @Column(name = "ROLENAME", nullable = false)
     private String roleName;
 
-    @OneToMany(mappedBy = "role")
-    @JsonManagedReference
-    List<UserRole> userRole;
-
-    public Integer getRoleId() {
-        return roleId;
+    public int getRoleID() {
+        return roleID;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
     }
 
     public String getRoleName() {
@@ -32,13 +28,5 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
-    }
-
-    public List<UserRole> getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(List<UserRole> userRole) {
-        this.userRole = userRole;
     }
 }

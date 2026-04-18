@@ -1,13 +1,16 @@
 package com.example.server.auth;
 
-import com.example.server.dto.requests.UserRegisterRequest;
-import com.example.server.dto.responses.UserLoginResponse;
+import com.example.server.dto.request.RegisterRequest;
+import com.example.server.dto.response.TokenResponse;
 import com.example.server.entities.Role;
 import com.example.server.entities.UserRole;
-import com.example.server.entities.User;
+import com.example.server.entities.Users;
 import com.example.server.repositories.RoleRepository;
 import com.example.server.repositories.UserRepository;
+import com.example.server.repositories.UserRoleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,35 +28,41 @@ public class AuthService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
     private JwtUtil jwt;
 
     // login
-    public UserLoginResponse login(String email, String password) {
-        User user = usersRepository.findByUserEmail(email)
+    @Transactional
+    public TokenResponse login(String email, String password) {
+        Users user = usersRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email doesn't exists!"));
 
-        if (!user.getUserPassword().equals(password)) {
+        if (!user.getPassword().equals(password)) {
             throw new RuntimeException("Wrong password!");
         }
 
-        String token = jwt.generateToken(user);
+        List<UserRole> userRoles = userRoleRepository.findByUser_UserID(user.getUserID());
+        String token = jwt.generateToken(user, userRoles);
 
-        UserLoginResponse userLoginResponse = new UserLoginResponse();
-        userLoginResponse.setToken(token);
+        TokenResponse tokenResponse = new TokenResponse();
+        tokenResponse.setToken(token);
 
-        return userLoginResponse;
+        return tokenResponse;
     }
 
-    public User register(UserRegisterRequest request) {
-        if (usersRepository.existsByUserEmail(request.getEmail()))
+    @Transactional
+    public ResponseEntity<?> register(RegisterRequest request) {
+        if (usersRepository.existsByEmail(request.getEmail()))
             throw new RuntimeException("Account already exists");
 
         // create new User
-        User user = new User();
-        user.setUserId("U002");
-        user.setUserName(request.getName());
-        user.setUserEmail(request.getEmail());
-        user.setUserPassword(request.getPassword());
+        Users user = new Users();
+        user.setHoTen(request.getHoTen());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+
+        usersRepository.save(user);
 
         // get Role
         Role role = roleRepository.findById(1)
@@ -61,18 +70,12 @@ public class AuthService {
 
         // create User Role
         UserRole userRole = new UserRole();
-        userRole.setUserRoleId("UR002");
         userRole.setUser(user);
         userRole.setRole(role);
 
-        // add User Roles to user
-        List<UserRole> roles = new ArrayList<>();
-        roles.add(userRole);
+        userRoleRepository.save(userRole);
 
-        user.setUserRole(roles);
-
-        // return user to dtb
-        return user;
+        return ResponseEntity.ok().build();
     }
 
 }

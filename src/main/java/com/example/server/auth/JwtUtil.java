@@ -1,6 +1,8 @@
 package com.example.server.auth;
 
-import com.example.server.entities.User;
+import com.example.server.entities.Role;
+import com.example.server.entities.UserRole;
+import com.example.server.entities.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,21 +19,21 @@ public class JwtUtil {
     private static final String SECRET_KEY = "anchou_super_secret_key_anchou_super_secret_key_2026";
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    public String generateToken(User user) {
-        List<String> roles = user.getUserRole()
+    public String generateToken(Users user, List<UserRole> userRoles) {
+        List<String> role_name = userRoles
                 .stream()
                 .map(userRole -> userRole.getRole().getRoleName())
                 .toList();
 
-        System.out.println(user.getUserEmail() + " roles: ");
-        for (String role : roles) {
+        System.out.println(user.getEmail() + " roles: ");
+        for (String role : role_name) {
             System.out.println(role);
         }
         System.out.println("-----");
 
         return Jwts.builder()
-                .setSubject(user.getUserId())
-                .claim("roles", roles)
+                .setSubject(user.getUserID())
+                .claim("roles", role_name)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(key, SignatureAlgorithm.HS256)

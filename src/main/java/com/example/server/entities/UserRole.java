@@ -1,32 +1,27 @@
 package com.example.server.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "USER_ROLE")
 public class UserRole {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USERROLE_ID")
-    private String userRoleId;
+    @Column(name = "USERROLE_ID", nullable = false)
+    private String userRoleID;
 
     @ManyToOne
-    @JoinColumn(name = "ROLE_ID", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "ROLE_ID")
     private Role role;
     @ManyToOne
-    @JoinColumn(name = "USER_ID", nullable = false)
-    @JsonBackReference
-    private User user;
+    @JoinColumn(name = "USER_ID")
+    private Users user;
 
-    public String getUserRoleId() {
-        return userRoleId;
+    public String getUserRoleID() {
+        return userRoleID;
     }
 
-    public void setUserRoleId(String userRoleId) {
-        this.userRoleId = userRoleId;
+    public void setUserRoleID(String userRoleID) {
+        this.userRoleID = userRoleID;
     }
 
     public Role getRole() {
@@ -37,11 +32,11 @@ public class UserRole {
         this.role = role;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 }
