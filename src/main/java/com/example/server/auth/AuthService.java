@@ -10,11 +10,13 @@ import com.example.server.repositories.UserRepository;
 import com.example.server.repositories.UserRoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Service
@@ -36,14 +38,16 @@ public class AuthService {
     @Transactional
     public TokenResponse login(String email, String password) {
         Users user = usersRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Email doesn't exists!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại!"));
 
         if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Wrong password!");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Mật khẩu sai!");
         }
 
         List<UserRole> userRoles = userRoleRepository.findByUser_UserID(user.getUserID());
         String token = jwt.generateToken(user, userRoles);
+
+        System.out.println(token);
 
         TokenResponse tokenResponse = new TokenResponse();
         tokenResponse.setToken(token);
@@ -75,7 +79,7 @@ public class AuthService {
 
         userRoleRepository.save(userRole);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(Map.of("Message", "Register Success"));
     }
 
 }

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "KHOAHOC")
 public class KhoaHoc {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "KHOAHOC_ID", nullable = false)
     private String khoaHocID;
     @Column(name = "TENKH", nullable = false)
@@ -27,6 +28,8 @@ public class KhoaHoc {
     private int slhv;
     @Column(name = "TINHTRANG")
     private int tinhTrang;
+    @Column(name = "URL")
+    private String url;
 
     @ManyToOne
     @JoinColumn(name = "NGUOIHUONGDAN_ID")
@@ -102,6 +105,14 @@ public class KhoaHoc {
 
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public NguoiHuongDan getNguoiHuongDan() {

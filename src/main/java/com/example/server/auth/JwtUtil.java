@@ -20,20 +20,14 @@ public class JwtUtil {
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
     public String generateToken(Users user, List<UserRole> userRoles) {
-        List<String> role_name = userRoles
+        List<String> roles = userRoles
                 .stream()
                 .map(userRole -> userRole.getRole().getRoleName())
                 .toList();
 
-        System.out.println(user.getEmail() + " roles: ");
-        for (String role : role_name) {
-            System.out.println(role);
-        }
-        System.out.println("-----");
-
         return Jwts.builder()
                 .setSubject(user.getUserID())
-                .claim("roles", role_name)
+                .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(key, SignatureAlgorithm.HS256)

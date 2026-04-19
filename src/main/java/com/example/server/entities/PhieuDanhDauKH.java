@@ -19,4 +19,44 @@ public class PhieuDanhDauKH {
     @ManyToOne
     @JoinColumn(name = "NHANVIENDANHDAU")
     private NhanVien nhanVien;
+
+    public String getPhieuDanhDauID() {
+        return phieuDanhDauID;
+    }
+
+    public void setPhieuDanhDauID(String phieuDanhDauID) {
+        this.phieuDanhDauID = phieuDanhDauID;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public int getMucDanhDau() {
+        return mucDanhDau;
+    }
+
+    public void setMucDanhDau(int mucDanhDau) {
+        this.mucDanhDau = mucDanhDau;
+    }
+
+    public KhoaHoc getKhoaHoc() {
+        return khoaHoc;
+    }
+
+    public void setKhoaHoc(KhoaHoc khoaHoc) {
+        this.khoaHoc = khoaHoc;
+    }
+
+    public NhanVien getNhanVien() {
+        return nhanVien;
+    }
+
+    public void setNhanVien(NhanVien nhanVien) {
+        this.nhanVien = nhanVien;
+    }
 }

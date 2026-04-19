@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "THAMGIAKH")
 public class ThamGiaKH {
     @Id
-    @Column(name = "THAMGIA_ID", nullable = false)
+    @Column(name = "THAMGIAKH_ID", nullable = false)
     private String thamGiaID;
     @Column(name = "NGAYDANGKY")
     private LocalDate ngayDangKy;
