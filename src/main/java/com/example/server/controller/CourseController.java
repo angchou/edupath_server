@@ -1,13 +1,14 @@
 package com.example.server.controller;
 
+import com.example.server.dto.request.CourseTextUploadRequest;
 import com.example.server.dto.request.CreateCourseRequest;
 import com.example.server.dto.response.CourseCardResponse;
+import com.example.server.dto.response.CourseResourceResponse;
 import com.example.server.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,10 +38,28 @@ public class CourseController {
         return courseService.getCreatedCourses();
     }
 
+    @GetMapping("/get/resource/{khoaHocID}")
+    @PreAuthorize("isAuthenticated()")
+    public List<CourseResourceResponse> getCourseRecourse(@PathVariable String khoaHocID) {
+        return courseService.getCourseResource(khoaHocID);
+    }
+
     @PostMapping("/create")
     @PreAuthorize("hasAnyRole('MENTOR')")
-    public ResponseEntity<?> createNewCourse(@RequestBody CreateCourseRequest request) {
+    public String createNewCourse(@RequestBody CreateCourseRequest request) {
         return courseService.createNewCourse(request);
+    }
+
+    @PostMapping("/create/{khoaHocID}/text")
+    @PreAuthorize("hasRole('MENTOR')")
+    public ResponseEntity<?> createText(@PathVariable String khoaHocID, @RequestBody CourseTextUploadRequest request) {
+        return courseService.createText(khoaHocID, request);
+    }
+
+    @DeleteMapping("/delete/{khoaHocID}/{taiNguyenID}")
+    @PreAuthorize("hasRole('MENTOR')")
+    public ResponseEntity<?> deleteResource(@PathVariable String khoaHocID, @PathVariable String taiNguyenID) {
+        return courseService.deleteResource(khoaHocID, taiNguyenID);
     }
 
 }

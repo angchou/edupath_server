@@ -1,26 +1,19 @@
-package com.example.server.entities;
+package com.example.server.dto.response;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "TAINGUYEN")
-public class TaiNguyen {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TAINGUYEN_ID", nullable = false)
+public class CourseResourceResponse {
     private String taiNguyenID;
-    @Column(name = "URL")
     private String url;
-    @Column(name = "LOAITN", nullable = false)
     private int loaiTN;
-    @Column(name = "STT", nullable = false)
     private int stt;
-    @Column(name = "TEXT")
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "KHOAHOC_ID")
-    private KhoaHoc khoaHoc;
+    public CourseResourceResponse(String taiNguyenID, String url, int loaiTN, int stt, String text) {
+        this.taiNguyenID = taiNguyenID;
+        this.url = url;
+        this.loaiTN = loaiTN;
+        this.stt = stt;
+        this.text = text;
+    }
 
     public String getTaiNguyenID() {
         return taiNguyenID;
@@ -60,13 +53,5 @@ public class TaiNguyen {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public KhoaHoc getKhoaHoc() {
-        return khoaHoc;
-    }
-
-    public void setKhoaHoc(KhoaHoc khoaHoc) {
-        this.khoaHoc = khoaHoc;
     }
 }
