@@ -1,0 +1,31 @@
+package com.example.server.actions;
+
+public enum CourseActions {
+    // GET
+    GET_DEMO,
+    GET_LESSON,
+    GET_RESOURCE,
+
+    // POST
+    CREATE_LESSON,
+    CREATE_RESOURCE,
+    ENROLL,
+    MARK_COURSE,
+    UNMARK_COURSE,
+
+    // DELETE
+    DELETE_LESSON,
+    DELETE_RESOURCE,
+
+    // PATCH
+    UPDATE_COURSE,
+    UPDATE_LESSON,
+    UPDATE_RESOURCE,
+    REQUEST_OPEN,
+    LOCK_COURSE,
+    BAN_COURSE,
+    UNBAN_COURSE,
+    PUBLIC_COURSE,
+    DELETE_COURSE,
+    REJECT_COURSE
+}

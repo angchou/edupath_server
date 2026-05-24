@@ -1,6 +1,7 @@
 package com.example.server.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ public class ChiPhiKM {
     @Id
     @Column(name = "CHIPHIKM_ID", nullable = false)
     private String chiPhiKMID;
-    @Column(name = "SOTIENGIAM", nullable = false)
+    @Column(name = "SOTIENGIAM")
     private BigDecimal soTienGiam;
     @Column(name = "NGAYPHATSINH")
     private LocalDate ngayPhatSinh;
@@ -21,9 +22,11 @@ public class ChiPhiKM {
     @JoinColumn(name = "GIAODICH_ID")
     private GiaoDich giaoDich;
     @OneToOne
-    @MapsId
     @JoinColumn(name = "VOUCHER_ID")
     private Voucher voucher;
+    @ManyToOne
+    @JoinColumn(name = "LOAINGANSACH")
+    private LoaiNganSach loaiNganSach;
 
     public String getChiPhiKMID() {
         return chiPhiKMID;
@@ -63,5 +66,13 @@ public class ChiPhiKM {
 
     public void setVoucher(Voucher voucher) {
         this.voucher = voucher;
+    }
+
+    public LoaiNganSach getLoaiNganSach() {
+        return loaiNganSach;
+    }
+
+    public void setLoaiNganSach(LoaiNganSach loaiNganSach) {
+        this.loaiNganSach = loaiNganSach;
     }
 }

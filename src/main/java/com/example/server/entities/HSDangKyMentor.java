@@ -1,5 +1,6 @@
 package com.example.server.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "HSDANGKYMENTOR")
 public class HSDangKyMentor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HOSO_ID", nullable = false)
     private String hoSoID;
     @Column(name = "TRANGTHAI", nullable = false)
@@ -19,6 +21,7 @@ public class HSDangKyMentor {
 
     @ManyToOne
     @JoinColumn(name = "HOCVIEN_ID")
+    @JsonIgnore
     private HocVien hocVien;
 
     public String getHoSoID() {

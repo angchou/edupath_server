@@ -8,12 +8,13 @@ import java.time.LocalDate;
 @Table(name = "THAMGIAKH")
 public class ThamGiaKH {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "THAMGIAKH_ID", nullable = false)
     private String thamGiaID;
-    @Column(name = "NGAYDANGKY")
+    @Column(name = "NGAYDANGKY", nullable = false)
     private LocalDate ngayDangKy;
-    @Column(name = "THOIHAN", nullable = false)
-    private int thoiHan;
+    @Column(name = "NGAYHETHAN", nullable = false)
+    private LocalDate ngayHetHan;
 
     @ManyToOne
     @JoinColumn(name = "KHOAHOC_ID")
@@ -39,12 +40,12 @@ public class ThamGiaKH {
         this.ngayDangKy = ngayDangKy;
     }
 
-    public int getThoiHan() {
-        return thoiHan;
+    public LocalDate getNgayHetHan() {
+        return ngayHetHan;
     }
 
-    public void setThoiHan(int thoiHan) {
-        this.thoiHan = thoiHan;
+    public void setNgayHetHan(LocalDate ngayHetHan) {
+        this.ngayHetHan = ngayHetHan;
     }
 
     public KhoaHoc getKhoaHoc() {

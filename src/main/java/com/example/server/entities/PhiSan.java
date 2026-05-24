@@ -8,10 +8,9 @@ import java.math.BigDecimal;
 @Table(name = "PHISAN")
 public class PhiSan {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PHISAN_ID", nullable = false)
     private String phiSanID;
-    @Column(name = "DTNGUOIHUONGDAN", nullable = false)
-    private BigDecimal dtNguoiHuogngDan;
     @Column(name = "TILE", nullable = false)
     private BigDecimal tiLe;
     @Column(name = "SOTIENPHISAN", nullable = false)
@@ -33,14 +32,6 @@ public class PhiSan {
 
     public void setPhiSanID(String phiSanID) {
         this.phiSanID = phiSanID;
-    }
-
-    public BigDecimal getDtNguoiHuogngDan() {
-        return dtNguoiHuogngDan;
-    }
-
-    public void setDtNguoiHuogngDan(BigDecimal dtNguoiHuogngDan) {
-        this.dtNguoiHuogngDan = dtNguoiHuogngDan;
     }
 
     public BigDecimal getTiLe() {

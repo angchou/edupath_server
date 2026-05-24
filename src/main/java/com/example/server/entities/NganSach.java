@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Table(name = "NGANSACH")
 public class NganSach {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NGANSACH_ID", nullable = false)
     private String nganSachID;
     @Column(name = "TRIGIA", nullable = false)

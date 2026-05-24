@@ -29,4 +29,17 @@ public class ImageController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(value = "/block/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasAnyRole('MENTOR')")
+    public ResponseEntity<?> uploadImageResource(@RequestParam("image") MultipartFile file, @RequestParam("baiHocID") String baiHocID) {
+        System.out.println(file.getOriginalFilename()); // filename
+        System.out.println(file.getSize()); // size
+
+        System.out.println(baiHocID);
+
+        imageService.uploadImageResource(file, baiHocID);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

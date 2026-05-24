@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "TICKET")
 public class Ticket {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TICKET_ID", nullable = false)
     private String ticketID;
     @Column(name = "DOUUTIEN", nullable = false)
@@ -20,7 +21,7 @@ public class Ticket {
     private int trangThai;
     @Column(name = "NGAYTAO")
     private LocalDate ngayTao;
-    @Column(name = "NGAYHETHAN")
+    @Column(name = "NGAYHETHAN", nullable = false)
     private LocalDate ngayHetHan;
 
     @ManyToOne
@@ -29,9 +30,6 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "NHANVIENXULY_ID")
     private NhanVien nhanVienXuLy;
-    @ManyToOne
-    @JoinColumn(name = "NHANVIENCHUYENTIEP_ID")
-    private NhanVien nhanVienChuyenTiep;
 
     public String getTicketID() {
         return ticketID;
@@ -103,13 +101,5 @@ public class Ticket {
 
     public void setNhanVienXuLy(NhanVien nhanVienXuLy) {
         this.nhanVienXuLy = nhanVienXuLy;
-    }
-
-    public NhanVien getNhanVienChuyenTiep() {
-        return nhanVienChuyenTiep;
-    }
-
-    public void setNhanVienChuyenTiep(NhanVien nhanVienChuyenTiep) {
-        this.nhanVienChuyenTiep = nhanVienChuyenTiep;
     }
 }

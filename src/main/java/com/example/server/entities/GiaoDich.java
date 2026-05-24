@@ -4,17 +4,35 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "GIAODICH")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "GiaoDich.procCreateTransaction",
+                procedureName = "proc_create_transaction",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_user_id", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_khoa_hoc_id", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_voucher_id", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_cong_gd", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_status_code", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_message", type = String.class)
+                }
+        )
+})
 public class GiaoDich {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GIAODICH_ID", nullable = false)
     private String giaoDichID;
+    @Column(name = "GIAGOC", nullable = false)
+    private BigDecimal giaGoc;
     @Column(name = "TRIGIA", nullable = false)
     private BigDecimal triGia;
-    @Column(name = "NGAYGD")
-    private LocalDate ngayGD;
+    @Column(name = "NGAYGD", nullable = false)
+    private LocalDateTime ngayGD;
     @Column(name = "TRANGTHAI", nullable = false)
     private int trangThai;
     @Column(name = "CONGGD", nullable = false)
@@ -46,11 +64,19 @@ public class GiaoDich {
         this.triGia = triGia;
     }
 
-    public LocalDate getNgayGD() {
+    public BigDecimal getGiaGoc() {
+        return giaGoc;
+    }
+
+    public void setGiaGoc(BigDecimal giaGoc) {
+        this.giaGoc = giaGoc;
+    }
+
+    public LocalDateTime getNgayGD() {
         return ngayGD;
     }
 
-    public void setNgayGD(LocalDate ngayGD) {
+    public void setNgayGD(LocalDateTime ngayGD) {
         this.ngayGD = ngayGD;
     }
 

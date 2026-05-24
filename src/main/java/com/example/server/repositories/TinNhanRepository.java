@@ -1,0 +1,12 @@
+package com.example.server.repositories;
+
+import com.example.server.entities.TinNhan;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface TinNhanRepository extends JpaRepository<TinNhan, String> {
+    List<TinNhan> findByCuocTroChuyen_CuocTroChuyenIDOrderByThoiGianGui(String cuocTroChuyenID);
+}

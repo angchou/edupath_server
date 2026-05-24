@@ -19,8 +19,8 @@ public class TaiNguyen {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "KHOAHOC_ID")
-    private KhoaHoc khoaHoc;
+    @JoinColumn(name = "BAIHOC_ID")
+    private BaiHoc baiHoc;
 
     public String getTaiNguyenID() {
         return taiNguyenID;
@@ -62,11 +62,11 @@ public class TaiNguyen {
         this.text = text;
     }
 
-    public KhoaHoc getKhoaHoc() {
-        return khoaHoc;
+    public BaiHoc getBaiHoc() {
+        return baiHoc;
     }
 
-    public void setKhoaHoc(KhoaHoc khoaHoc) {
-        this.khoaHoc = khoaHoc;
+    public void setBaiHoc(BaiHoc baiHoc) {
+        this.baiHoc = baiHoc;
     }
 }

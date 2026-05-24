@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 @Table(name = "DAUVIECLOTRINH")
 public class DauViecLoTrinh {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DAUVIEC_ID", nullable = false)
     private String dauViecID;
     @Column(name = "TENDAUVIEC", nullable = false)
     private String tenDauViec;
     @Column(name = "STT", nullable = false)
     private int stt;
-    @Column(name = "MOTA")
+    @Column(name = "MOTA", nullable = false)
     private String moTa;
 
     @ManyToOne

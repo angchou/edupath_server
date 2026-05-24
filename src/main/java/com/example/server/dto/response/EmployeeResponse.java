@@ -8,23 +8,49 @@ public class EmployeeResponse {
     private String hoTen;
     private String email;
     private String password;
-    private String roleName;
+    private Integer roleID;
     private LocalDate ngayTao;
+    private Integer trangThai;
 
     private String chucVu;
     private BigDecimal luongCoBan;
     private BigDecimal luongPhuCap;
 
-    public EmployeeResponse(String userID, String hoTen, String email, String password, String roleName, LocalDate ngayTao, String chucVu, BigDecimal luongCoBan, BigDecimal luongPhuCap) {
+    public EmployeeResponse(String userID, String hoTen, String email, String password, Integer roleID, LocalDate ngayTao, Integer trangThai, String chucVu, BigDecimal luongCoBan, BigDecimal luongPhuCap) {
         this.userID = userID;
         this.hoTen = hoTen;
         this.email = email;
         this.password = password;
-        this.roleName = roleName;
+        this.roleID = roleID;
         this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
         this.chucVu = chucVu;
         this.luongCoBan = luongCoBan;
         this.luongPhuCap = luongPhuCap;
+    }
+
+    private LocalDate ngayTraLuongCuoiCung;
+
+    public EmployeeResponse(String userID, String hoTen, String email, String password, Integer roleID, LocalDate ngayTao, Integer trangThai, String chucVu, BigDecimal luongCoBan, BigDecimal luongPhuCap, LocalDate ngayTraLuongCuoiCung) {
+        this.userID = userID;
+        this.hoTen = hoTen;
+        this.email = email;
+        this.password = password;
+        this.roleID = roleID;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.chucVu = chucVu;
+        this.luongCoBan = luongCoBan;
+        this.luongPhuCap = luongPhuCap;
+        this.ngayTraLuongCuoiCung = ngayTraLuongCuoiCung;
+    }
+
+    public LocalDate getNgayTraLuongCuoiCung() {
+        return ngayTraLuongCuoiCung;
+    }
+
+    public void setNgayTraLuongCuoiCung(LocalDate ngayTraLuongCuoiCung) {
+        this.ngayTraLuongCuoiCung = ngayTraLuongCuoiCung;
     }
 
     public String getUserID() {
@@ -59,12 +85,12 @@ public class EmployeeResponse {
         this.password = password;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public Integer getRoleID() {
+        return roleID;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
     }
 
     public LocalDate getNgayTao() {
@@ -73,6 +99,14 @@ public class EmployeeResponse {
 
     public void setNgayTao(LocalDate ngayTao) {
         this.ngayTao = ngayTao;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getChucVu() {

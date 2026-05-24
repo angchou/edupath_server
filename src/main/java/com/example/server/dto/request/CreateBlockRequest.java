@@ -1,9 +1,10 @@
 package com.example.server.dto.request;
 
-public class CourseTextUploadRequest {
+public class CreateBlockRequest {
+    private String baiHocID;
+
     private String url;
     private int loaiTN;
-    private int stt;
     private String text;
 
     public String getUrl() {
@@ -22,19 +23,19 @@ public class CourseTextUploadRequest {
         this.loaiTN = loaiTN;
     }
 
-    public int getStt() {
-        return stt;
-    }
-
-    public void setStt(int stt) {
-        this.stt = stt;
-    }
-
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getBaiHocID() {
+        return baiHocID;
+    }
+
+    public void setBaiHocID(String baiHocID) {
+        this.baiHocID = baiHocID;
     }
 }

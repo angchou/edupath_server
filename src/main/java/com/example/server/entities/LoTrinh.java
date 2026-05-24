@@ -2,22 +2,39 @@ package com.example.server.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "LOTRINH")
 public class LoTrinh {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LOTRINH_ID", nullable = false)
     private String loTrinhID;
     @Column(name = "LAKHUONMAU", nullable = false)
     private int laKhuonMau;
+    @Column(name = "TRANGTHAI")
+    private int trangThai;
+    @Column(name = "MOTA")
+    private String moTa;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "HOCVIEN_ID")
     private HocVien hocVien;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "NGUOIHUONGDAN_ID")
     private NguoiHuongDan nguoiHuongDan;
+
+    @OneToMany(mappedBy = "loTrinh", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DauViecLoTrinh> danhSachDauViec;
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
 
     public String getLoTrinhID() {
         return loTrinhID;
@@ -49,5 +66,13 @@ public class LoTrinh {
 
     public void setNguoiHuongDan(NguoiHuongDan nguoiHuongDan) {
         this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 }

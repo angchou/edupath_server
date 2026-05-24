@@ -16,8 +16,6 @@ public class KhoaHoc {
     private String tenKH;
     @Column(name = "NGAYTAO")
     private LocalDate ngayTao;
-    @Column(name = "NGAYTHAYDOITRANGTHAI")
-    private LocalDate ngayThayDoiTrangThai;
     @Column(name = "LOAIKH", nullable = false)
     private int loaiKH;
     @Column(name = "MOTA", nullable = false)
@@ -30,10 +28,24 @@ public class KhoaHoc {
     private int tinhTrang;
     @Column(name = "URL")
     private String url;
+    @Column(name = "THOIHAN", nullable = false)
+    private Integer thoiHan;
 
     @ManyToOne
-    @JoinColumn(name = "NGUOIHUONGDAN_ID")
+    @JoinColumn(name = "NHANVIENKIEMDUYET")
+    private NhanVien nhanVienKiemDuyet;
+
+    @ManyToOne
+    @JoinColumn(name = "NGUOIHUONGDAN")
     private NguoiHuongDan nguoiHuongDan;
+
+    public NhanVien getNhanVienKiemDuyet() {
+        return nhanVienKiemDuyet;
+    }
+
+    public void setNhanVienKiemDuyet(NhanVien nhanVienKiemDuyet) {
+        this.nhanVienKiemDuyet = nhanVienKiemDuyet;
+    }
 
     public String getKhoaHocID() {
         return khoaHocID;
@@ -57,14 +69,6 @@ public class KhoaHoc {
 
     public void setNgayTao(LocalDate ngayTao) {
         this.ngayTao = ngayTao;
-    }
-
-    public LocalDate getNgayThayDoiTrangThai() {
-        return ngayThayDoiTrangThai;
-    }
-
-    public void setNgayThayDoiTrangThai(LocalDate ngayThayDoiTrangThai) {
-        this.ngayThayDoiTrangThai = ngayThayDoiTrangThai;
     }
 
     public int getLoaiKH() {
@@ -121,5 +125,13 @@ public class KhoaHoc {
 
     public void setNguoiHuongDan(NguoiHuongDan nguoiHuongDan) {
         this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public Integer getThoiHan() {
+        return thoiHan;
+    }
+
+    public void setThoiHan(Integer thoiHan) {
+        this.thoiHan = thoiHan;
     }
 }

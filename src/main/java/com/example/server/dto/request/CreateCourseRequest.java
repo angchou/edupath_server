@@ -8,6 +8,15 @@ public class CreateCourseRequest {
     private String moTa;
     private BigDecimal mucPhi;
     private int slhv;
+    private int thoiHan;
+
+    public int getThoiHan() {
+        return thoiHan;
+    }
+
+    public void setThoiHan(int thoiHan) {
+        this.thoiHan = thoiHan;
+    }
 
     public String getTenKH() {
         return tenKH;

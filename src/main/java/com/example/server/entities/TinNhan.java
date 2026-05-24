@@ -3,17 +3,19 @@ package com.example.server.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TINNHAN")
 public class TinNhan {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TINNHAN_ID", nullable = false)
     private String tinNhanID;
     @Column(name = "NOIDUNG", nullable = false)
     private String noiDung;
-    @Column(name = "THOIGIANGUI")
-    private LocalDate thoiGianGui;
+    @Column(name = "THOIGIANGUI", nullable = false)
+    private LocalDateTime thoiGianGui;
 
     @ManyToOne
     @JoinColumn(name = "NGUOIGUI")
@@ -38,11 +40,11 @@ public class TinNhan {
         this.noiDung = noiDung;
     }
 
-    public LocalDate getThoiGianGui() {
+    public LocalDateTime getThoiGianGui() {
         return thoiGianGui;
     }
 
-    public void setThoiGianGui(LocalDate thoiGianGui) {
+    public void setThoiGianGui(LocalDateTime thoiGianGui) {
         this.thoiGianGui = thoiGianGui;
     }
 

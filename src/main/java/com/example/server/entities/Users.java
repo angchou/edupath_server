@@ -22,6 +22,27 @@ public class Users {
     @Column(name = "NGAYTAO")
     private LocalDate ngayTao;
 
+    @OneToOne(mappedBy = "user")
+    private NguoiHuongDan nguoiHuongDan;
+    @OneToOne(mappedBy = "user")
+    private HocVien hocVien;
+
+    public NguoiHuongDan getNguoiHuongDan() {
+        return nguoiHuongDan;
+    }
+
+    public void setNguoiHuongDan(NguoiHuongDan nguoiHuongDan) {
+        this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public HocVien getHocVien() {
+        return hocVien;
+    }
+
+    public void setHocVien(HocVien hocVien) {
+        this.hocVien = hocVien;
+    }
+
     public String getUserID() {
         return userID;
     }

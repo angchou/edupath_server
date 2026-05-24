@@ -11,10 +11,10 @@ public class UserRole {
     private String userRoleID;
 
     @ManyToOne
-    @JoinColumn(name = "ROLE_ID")
+    @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID", nullable = false)
     private Users user;
 
     public String getUserRoleID() {

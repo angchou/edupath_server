@@ -8,11 +8,12 @@ import java.time.LocalDate;
 @Table(name = "THONGBAO")
 public class ThongBao {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "THONGBAO_ID", nullable = false)
     private String thongBaoID;
     @Column(name = "TIEUDE", nullable = false)
     private String tieuDe;
-    @Column(name = "NOIDUNG")
+    @Column(name = "NOIDUNG", nullable = false)
     private String noiDung;
     @Column(name = "NGAYTAO")
     private LocalDate ngayTao;

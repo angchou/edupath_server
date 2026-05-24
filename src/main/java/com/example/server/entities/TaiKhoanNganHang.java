@@ -6,12 +6,15 @@ import jakarta.persistence.*;
 @Table(name = "TAIKHOANNGANHANG")
 public class TaiKhoanNganHang {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TKNH_ID", nullable = false)
     private String tknhID;
     @Column(name = "STK", nullable = false)
     private String stk;
     @Column(name = "TENNH", nullable = false)
     private String tenNH;
+    @Column(name = "TRANGTHAI")
+    private Integer trangThai;
 
     @ManyToOne
     @JoinColumn(name = "NGUOIHUONGDAN_ID")
@@ -47,5 +50,13 @@ public class TaiKhoanNganHang {
 
     public void setNguoiHuongDan(NguoiHuongDan nguoiHuongDan) {
         this.nguoiHuongDan = nguoiHuongDan;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 }

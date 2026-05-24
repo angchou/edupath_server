@@ -9,18 +9,19 @@ import java.time.LocalDate;
 @Table(name = "LUONGCHITIET")
 public class LuongChiTiet {
     @Id
-    @Column(name = "LUONGCHITIET_ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "LUONGCHITIET_ID")
     private String luongChiTietID;
     @Column(name = "LUONGTHUONG", nullable = false)
     private BigDecimal luongThuong;
     @Column(name = "LUONGKHAUTRU", nullable = false)
     private BigDecimal luongKhauTru;
-    @Column(name = "LUONGCUOICUNG")
+    @Column(name = "LUONGCUOICUNG", nullable = false)
     private BigDecimal luongCuoiCung;
     @Column(name = "TRANGTHAI", nullable = false)
     private int trangThai;
     @Column(name = "THOIGIAN")
-    private LocalDate thoiGian;
+    private LocalDate ngayTao;
 
     @ManyToOne
     @JoinColumn(name = "NHANVIEN_ID")
@@ -69,12 +70,12 @@ public class LuongChiTiet {
         this.trangThai = trangThai;
     }
 
-    public LocalDate getThoiGian() {
-        return thoiGian;
+    public LocalDate getNgayTao() {
+        return ngayTao;
     }
 
-    public void setThoiGian(LocalDate thoiGian) {
-        this.thoiGian = thoiGian;
+    public void setNgayTao(LocalDate ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
     public NhanVien getNhanVien() {

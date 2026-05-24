@@ -8,9 +8,10 @@ import java.time.LocalDate;
 @Table(name = "PHIEUDANHGIA")
 public class PhieuDanhGia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PHIEUDANHGIA_ID", nullable = false)
     private String phieuDanhGiaID;
-    @Column(name = "CHITIET")
+    @Column(name = "CHITIET", nullable = false)
     private String chiTiet;
     @Column(name = "DIEMDANHGIA", nullable = false)
     private int diemDanhGia;
@@ -20,6 +21,10 @@ public class PhieuDanhGia {
     @ManyToOne
     @JoinColumn(name = "KHOAHOC_ID")
     private KhoaHoc khoaHoc;
+
+    @ManyToOne
+    @JoinColumn(name = "HOCVIEN_ID")
+    private HocVien hocVien;
 
     public String getPhieuDanhGiaID() {
         return phieuDanhGiaID;
@@ -59,5 +64,13 @@ public class PhieuDanhGia {
 
     public void setKhoaHoc(KhoaHoc khoaHoc) {
         this.khoaHoc = khoaHoc;
+    }
+
+    public HocVien getHocVien() {
+        return hocVien;
+    }
+
+    public void setHocVien(HocVien hocVien) {
+        this.hocVien = hocVien;
     }
 }
