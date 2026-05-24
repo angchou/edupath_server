@@ -29,6 +29,8 @@ public class ApplicationService {
     private UserRoleRepository userRoleRepository;
     @Autowired
     private NguoiHuongDanRepository nguoiHuongDanRepository;
+    @Autowired
+    private NotificationService notificationService;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -56,6 +58,8 @@ public class ApplicationService {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
         }
         hsDangKyMentor.setTrangThai(1);
+        notificationService.createNotification("Hồ sơ đăng ký làm người hướng dẫn đạt đủ chất lượng",
+                "Hồ sơ đăng ký của bạn đã được phê duyệt và chờ cấp quyền người hướng dẫn!", hsDangKyMentor.getHocVien().getUser());
     }
 
     @Transactional
@@ -66,6 +70,9 @@ public class ApplicationService {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
         }
         hsDangKyMentor.setTrangThai(3);
+        notificationService.createNotification("Hồ sơ đăng ký làm người hướng dẫn không đạt đủ chất lượng",
+                "Hồ sơ đăng ký của bạn đã bị từ chối!", hsDangKyMentor.getHocVien().getUser());
+
     }
 
     @Transactional
@@ -84,6 +91,7 @@ public class ApplicationService {
         String message = (String) query.getOutputParameterValue("p_message");
 
         if (statusCode != 200) {
+            System.out.println(message);
             if (statusCode == -20001 || statusCode == -20003) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
             } else if (statusCode == -20002) {
