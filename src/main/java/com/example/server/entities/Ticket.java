@@ -15,6 +15,8 @@ public class Ticket {
     private int doUuTien;
     @Column(name = "MOTA", nullable = false)
     private String moTa;
+    @Column(name = "PHANHOI", nullable = false)
+    private String phanhoi;
     @Column(name = "LOAITICKET", nullable = false)
     private int loaiTicket;
     @Column(name = "TRANGTHAI", nullable = false)
@@ -30,6 +32,14 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "NHANVIENXULY_ID")
     private NhanVien nhanVienXuLy;
+
+    public String getPhanhoi() {
+        return phanhoi;
+    }
+
+    public void setPhanhoi(String phanhoi) {
+        this.phanhoi = phanhoi;
+    }
 
     public String getTicketID() {
         return ticketID;

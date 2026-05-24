@@ -54,6 +54,7 @@ public class TicketService {
         ticket.setNgayTao(LocalDate.now());
         ticket.setNgayHetHan(LocalDate.now().plusDays(14));
         ticket.setNguoiTao(user);
+        ticket.setPhanhoi("Không có");
         ticketRepository.save(ticket);
 
         return ResponseEntity.ok().build();
