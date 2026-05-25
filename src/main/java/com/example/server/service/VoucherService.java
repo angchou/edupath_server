@@ -41,11 +41,11 @@ public class VoucherService {
         Voucher voucher = voucherRepository.findByMaApDung(maApDung)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (
-                !voucher.getHanSuDung().isBefore(LocalDate.now())
-                        && !(voucher.getSlDaSuDung() < voucher.getSlToiDa())
-                        && !(voucher.getTrangThai() == 1)
+                voucher.getHanSuDung().isBefore(LocalDate.now())
+                        || voucher.getSlDaSuDung() >= voucher.getSlToiDa()
+                        || voucher.getTrangThai() == 0
         ) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Voucher không hợp lệ hoặc đã hết hạn sử dụng");
         }
         return new CheckVoucherResponse(
                 voucher.getVoucherID(),
