@@ -257,6 +257,7 @@ public class TransactionService {
         String message = (String) query.getOutputParameterValue("p_message");
 
         if (statusCode != 200) {
+            System.out.println(message);
             if (statusCode == -20001 || statusCode == -20002 || statusCode == -20004) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
             } else if (statusCode == -20003) {
@@ -303,6 +304,7 @@ public class TransactionService {
         Integer statusCode = (Integer) result.get("p_status_code");
         String message = (String) result.get("p_message");
 
+            System.out.println(message);
         if (statusCode == 200) {
             return ResponseEntity.ok().body(Map.of("message", message));
         } else if (statusCode == -20003 || statusCode == -20005) {
