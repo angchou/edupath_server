@@ -183,20 +183,25 @@ public class TransactionService {
     public RevenueResponse getMentorRevenue() {
         String userID = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
 
-        Query queryKhaDung = entityManager.createNativeQuery("SELECT func_TinhSoDuKhaDung(:userID) FROM dual");
-        queryKhaDung.setParameter("userID", userID);
-        Object result = queryKhaDung.getSingleResult();
-        BigDecimal soDuKhaDung = (result != null) ? new BigDecimal(result.toString()) : BigDecimal.ZERO;
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("proc_TinhChiTietSoDu");
+        query.registerStoredProcedureParameter("p_user_id", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_tong_giao_dich", BigDecimal.class, ParameterMode.OUT);
+        query.registerStoredProcedureParameter("p_tong_phi_san", BigDecimal.class, ParameterMode.OUT);
+        query.registerStoredProcedureParameter("p_tong_tien_rut", BigDecimal.class, ParameterMode.OUT);
+        query.registerStoredProcedureParameter("p_so_du_kha_dung", BigDecimal.class, ParameterMode.OUT);
 
-        BigDecimal tongDoanhThu = giaoDichRepository.sumTriGiaByNguoiHuongDan(userID)
-                .subtract(phiSanRepository.sumSoTienPhiSanByNguoiHuongDan(userID));
+        query.setParameter("p_user_id", userID);
+        query.execute();
 
-        BigDecimal daRutThanhCong = phieuRutTienRepository.sumSoTienRutByUserID(userID);
+        BigDecimal tongDoanhThu = (BigDecimal) query.getOutputParameterValue("p_tong_giao_dich");
+        BigDecimal tongPhiSan = (BigDecimal) query.getOutputParameterValue("p_tong_phi_san");
+        BigDecimal daRutThanhCong = (BigDecimal) query.getOutputParameterValue("p_tong_tien_rut");
+        BigDecimal soDuKhaDung = (BigDecimal) query.getOutputParameterValue("p_so_du_kha_dung");
 
         List<PhieuRutTien> danhSachRutTien = phieuRutTienRepository.findByNguoiHuongDan_UserID(userID);
 
         return new RevenueResponse(
-                tongDoanhThu,
+                tongDoanhThu.subtract(tongPhiSan),
                 daRutThanhCong,
                 soDuKhaDung,
                 danhSachRutTien.stream().map(rt -> new WithdrawResponse(
