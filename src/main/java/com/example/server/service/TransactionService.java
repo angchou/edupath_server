@@ -198,10 +198,15 @@ public class TransactionService {
         BigDecimal daRutThanhCong = (BigDecimal) query.getOutputParameterValue("p_tong_tien_rut");
         BigDecimal soDuKhaDung = (BigDecimal) query.getOutputParameterValue("p_so_du_kha_dung");
 
+        System.out.println("tongDoanhThu = " + tongDoanhThu);
+        System.out.println("soDuKhaDung = " + soDuKhaDung);
+        System.out.println("tongPhiSan = " + tongPhiSan);
+
         List<PhieuRutTien> danhSachRutTien = phieuRutTienRepository.findByNguoiHuongDan_UserID(userID);
 
         return new RevenueResponse(
                 tongDoanhThu.subtract(tongPhiSan),
+                tongPhiSan,
                 daRutThanhCong,
                 soDuKhaDung,
                 danhSachRutTien.stream().map(rt -> new WithdrawResponse(
@@ -264,10 +269,13 @@ public class TransactionService {
         if (statusCode != 200) {
             System.out.println(message);
             if (statusCode == -20001 || statusCode == -20002 || statusCode == -20004) {
+                System.out.println(message);
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
             } else if (statusCode == -20003) {
+                System.out.println(message);
                 throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, message);
             } else {
+                System.out.println(message);
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database Error: " + message);
             }
         }
@@ -309,14 +317,16 @@ public class TransactionService {
         Integer statusCode = (Integer) result.get("p_status_code");
         String message = (String) result.get("p_message");
 
-            System.out.println(message);
         if (statusCode == 200) {
             return ResponseEntity.ok().body(Map.of("message", message));
         } else if (statusCode == -20003 || statusCode == -20005) {
+            System.out.println(message);
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, message);
         } else if (statusCode == -20001 || statusCode == -20002 || statusCode == -20004) {
+            System.out.println(message);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
         } else {
+            System.out.println(message);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database Error: " + message);
         }
     }

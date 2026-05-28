@@ -7,13 +7,23 @@ public class RevenueResponse {
     private BigDecimal tongDoanhThu;
     private BigDecimal daRutThanhCong;
     private BigDecimal soDuKhaDung;
+    private BigDecimal tongPhiSan;
     private List<WithdrawResponse> danhSachRutTien;
 
-    public RevenueResponse(BigDecimal tongDoanhThu, BigDecimal daRutThanhCong, BigDecimal soDuKhaDung, List<WithdrawResponse> danhSachRutTien) {
+    public RevenueResponse(BigDecimal tongDoanhThu, BigDecimal tongPhiSan, BigDecimal daRutThanhCong, BigDecimal soDuKhaDung, List<WithdrawResponse> danhSachRutTien) {
         this.tongDoanhThu = tongDoanhThu;
+        this.tongPhiSan = tongPhiSan;
         this.daRutThanhCong = daRutThanhCong;
         this.soDuKhaDung = soDuKhaDung;
         this.danhSachRutTien = danhSachRutTien;
+    }
+
+    public BigDecimal getTongPhiSan() {
+        return tongPhiSan;
+    }
+
+    public void setTongPhiSan(BigDecimal tongPhiSan) {
+        this.tongPhiSan = tongPhiSan;
     }
 
     public BigDecimal getTongDoanhThu() {
